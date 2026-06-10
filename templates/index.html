@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="cards">
+    <div class="card">
+        <h3>Total Orders</h3>
+        <p>{{ total_orders }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Pending</h3>
+        <p>{{ pending_orders }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Delivered</h3>
+        <p>{{ delivered_orders }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Value</h3>
+        <p>KES {{ total_value }}</p>
+    </div>
+</section>
+
+<form method="GET" class="filter-form">
+    <label>Filter by status:</label>
+    <select name="status">
+        <option value="">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Delivered">Delivered</option>
+        <option value="Cancelled">Cancelled</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.customer_name }}</td>
+            <td>{{ order.location }}</td>
+            <td>{{ order.status }}</td>
+            <td>KES {{ order.amount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
